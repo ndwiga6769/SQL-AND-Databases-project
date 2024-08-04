@@ -53,3 +53,33 @@ WHERE
     p.ProductSubcategoryID IS NOT NULL
 ORDER BY 
 Category;
+
+-- -- 1.3 Use the established query to select the most expensive
+--  (price listed over 2000) bikes that are still actively sold 
+--  (does not have a sales end date)
+
+-- -- Order the results from most to least expensive bike.
+
+SELECT 
+    p.ProductID,
+    p.Name AS ProductName,
+    p.ProductNumber,
+    p.Size,
+    p.Color,
+    p.ProductSubcategoryID,
+    ps.Name AS Subcategory,
+    pc.Name AS Category,
+FROM 
+    tc-da-1.adwentureworks_db.product p
+JOIN 
+    tc-da-1.adwentureworks_db.productsubcategory ps
+ON 
+    p.ProductSubcategoryID = ps.ProductSubcategoryID
+JOIN 
+    tc-da-1.adwentureworks_db.productcategory pc
+ON 
+    ps.ProductCategoryID = pc.ProductCategoryID
+WHERE 
+    p.ProductSubcategoryID IS NOT NULL
+ORDER BY 
+Category;
