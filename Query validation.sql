@@ -51,3 +51,40 @@ left join `tc-da-1.adwentureworks_db.specialoffer` as spec_offer
 on sales_detail.SpecialOfferID = spec_offer.SpecialOfferID
 
 order by LineTotal desc;
+
+-- Your colleague has written this query to collect basic Vendor information.
+--  The query does not work, look into the query and find ways to fix it.
+--   Can you provide any feedback on how to make this query be easier to debug/read?
+
+-- Query below:
+
+Code:
+
+-- SELECT a.VendorId as Id,vendor_contact.ContactId, b.ContactTypeId, a.Name, a.CreditRating, a.ActiveFlag, c.AddressId,d.City
+
+-- FROM tc-da-1.adwentureworks_db.Vendor as a
+
+-- left join tc-da-1.adwentureworks_db.vendorcontact as vendor_contact on vendor.VendorId = vendor_contact.VendorId left join tc-da1.adwentureworks_db.vendoraddress as c on a.VendorId = c.VendorId
+
+-- left join tc-da-1.adwentureworks_db.address as address on vendor_address.VendorId = d.VendorId
+
+SELECT 
+    a.VendorId AS Id,
+    vendor_contact.ContactId,
+    vendor_contact.ContactTypeId,
+    a.Name,
+    a.CreditRating,
+    a.ActiveFlag,
+    c.AddressId,
+    address.City
+FROM 
+    tc-da-1.adwentureworks_db.vendor AS a
+LEFT JOIN 
+    tc-da-1.adwentureworks_db.vendorcontact AS vendor_contact 
+    ON a.VendorId = vendor_contact.VendorId
+LEFT JOIN 
+    tc-da-1.adwentureworks_db.vendoraddress AS c 
+    ON a.VendorId = c.VendorId
+LEFT JOIN 
+    tc-da-1.adwentureworks_db.address AS address 
+    ON c.AddressId = address.AddressId;
