@@ -42,3 +42,17 @@ WHERE
     (w.ActualStartDate >= '2004-01-01' AND w.ActualStartDate < '2004-02-01')
 GROUP BY 
     w.LocationID, l.Name;
+
+-- 2.3 Select all the expensive work Orders (above 300 actual cost) that happened throught January 2004
+SELECT 
+    w.WorkOrderID,
+    SUM(w.ActualCost) AS actual_cost
+FROM 
+    tc-da-1.adwentureworks_db.workorderrouting w
+WHERE
+    w.ActualStartDate >= '2004-01-01' 
+    AND w.ActualStartDate < '2004-02-01'
+GROUP BY 
+    w.workorderID
+HAVING 
+    actual_cost > 300;
