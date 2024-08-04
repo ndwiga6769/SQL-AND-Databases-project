@@ -59,7 +59,6 @@ Category;
 --  (does not have a sales end date)
 
 -- -- Order the results from most to least expensive bike.
-
 SELECT 
     p.ProductID,
     p.Name AS ProductName,
@@ -69,6 +68,7 @@ SELECT
     p.ProductSubcategoryID,
     ps.Name AS Subcategory,
     pc.Name AS Category,
+    p.ListPrice
 FROM 
     tc-da-1.adwentureworks_db.product p
 JOIN 
@@ -81,5 +81,9 @@ ON
     ps.ProductCategoryID = pc.ProductCategoryID
 WHERE 
     p.ProductSubcategoryID IS NOT NULL
+    AND p.ListPrice > 2000
+    AND p.SellEndDate IS NULL
+    AND pc.Name = 'Bikes'
 ORDER BY 
-Category;
+    ListPrice DESC;
+
